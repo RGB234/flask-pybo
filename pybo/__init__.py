@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flaskext.markdown import Markdown
 
-import config
+#import config  현재 config.py 파일은 삭제됨
 
 naming_convention = {
     "ix": "ix_%(column_0_label)s",
@@ -17,9 +17,13 @@ naming_convention = {
 db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 
+###################################################################################
+# AWS 서버 유지할 생각이 없으므로 APP_CONFIG_FILE 환경변수는 현재 설정되어있지않음#
+
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config)
+    #app.config.from_object(config)
+    app.config.from_envvar('APP_CONFIG_FILE')
 
     #ORM
     db.init_app(app)
