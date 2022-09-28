@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\static",
+    "\\templates",
+    "\\templates\\question",
+    "\\views"
+  ],
+  "SelectedNode": "\\templates\\question\\question_list.html",
+  "PreviewInSolutionExplorer": false
+}
