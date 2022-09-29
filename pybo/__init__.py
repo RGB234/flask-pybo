@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
@@ -13,12 +13,13 @@ naming_convention = {
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
     "pk": "pk_%(table_name)s"
 }
-
+#######################
+# AWS 무료체험기간이 1달이므로 아끼기위해 서버관련 설정 대부분누락
 db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 
-###################################################################################
-# AWS 서버 유지할 생각이 없으므로 APP_CONFIG_FILE 환경변수는 현재 설정되어있지않음#
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 def create_app():
     app = Flask(__name__)
@@ -50,5 +51,7 @@ def create_app():
 
     #markdown
     Markdown(app, extensions=['nl2br', 'fenced_code'])
-    
+    #오류페이지
+    app.register_error_handler(404, page_not_found)
+
     return app

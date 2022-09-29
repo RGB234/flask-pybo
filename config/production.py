@@ -1,4 +1,4 @@
-from config import *
+from config.default import *
 
 SQLAlCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'pybo.db'))
 SQLAlCHEMY_TRACK_MODIFICATIONS = False
