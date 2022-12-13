@@ -14,7 +14,8 @@ naming_convention = {
     "pk": "pk_%(table_name)s"
 }
 #######################
-# AWS 무료체험기간이 1달이므로 아끼기위해 서버관련 설정 대부분누락
+# AWS 무료체험기간이 1달이므로 아끼기위해 아직 AWS 무료체험판 사용하지않음
+# AWS 서버관련 설정 구현은 했으나 설명은 대부분 하지않았음
 db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 

@@ -11,7 +11,7 @@ from pybo.views.auth_views import login_required
 bp = Blueprint('comment', __name__, url_prefix='/comment')
 
 
-@bp.route('/create/question/<int:question_id>', methods=('GET', 'POST'))
+@bp.route('/create/question/<int:question_id>', methods=('GET', 'POST')) #'GET'요청 방식과 'Post'요청방식 처리 가능
 @login_required
 def create_question(question_id):
     form = CommentForm()

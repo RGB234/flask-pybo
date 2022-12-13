@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField
+from wtforms import StringField, TextAreaField, PasswordField, EmailField
 from wtforms.validators import DataRequired, Length, EqualTo, Email
-from wtforms.fields.html5 import EmailField
+#from wtforms.fields.html5 import EmailField wtforms.fields.html5 에 있는 EmailField 가 wtforms로 옮겨간듯?
 
 class QuestionForm(FlaskForm):
     subject = StringField('제목', validators=[DataRequired('제목은 필수 입력사항입니다')])

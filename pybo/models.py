@@ -20,7 +20,7 @@ class Question(db.Model):
     #User 모델 데이터를 통해 Question모델 데이터 참조를 위함, question 객체 생성시 user = g.user() 대입
     user = db.relationship('User', backref=db.backref('question_set'))
     modify_date = db.Column(db.DateTime(), nullable=True)
-    #voter 는 User 모델과 question_voter 테이블을 참조하여 다대다 관계를 형성
+    #voter 는 User 모델과 question_voter 테이블을 참조하여 다대다 관계(두 모델 간에 두 개 이상의 relationship)를 형성
     voter = db.relationship('User', secondary=question_voter, backref=db.backref('question_voter_set'))
 
 answer_voter = db.Table(
@@ -49,7 +49,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120), nullable=False)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

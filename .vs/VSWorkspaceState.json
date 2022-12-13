@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\config",
-    "\\pybo"
+    "\\pybo",
+    "\\pybo\\views"
   ],
-  "SelectedNode": "\\config\\production.py",
+  "SelectedNode": "\\pybo\\views\\main_views.py",
   "PreviewInSolutionExplorer": false
 }
