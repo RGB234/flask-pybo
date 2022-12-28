@@ -87,6 +87,7 @@ def modify(question_id):
         form = QuestionForm()
         if form.validate_on_submit():
             form.populate_obj(question)
+            # populate_obj 는 화면에 작성된 form 변수에 들어있는 데이터를 quesiton 객체에 적용하는데 사용
             question.modify_date = datetime.now()
             db.session.commit()
             return redirect(url_for('question.detail', question_id=question_id))

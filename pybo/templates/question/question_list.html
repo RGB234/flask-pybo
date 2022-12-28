@@ -32,6 +32,8 @@
         {% for question in question_list.items %}
             <tr class="text-center">
                 <td>{{ question_list.total - (question_list.page -1) * question_list.per_page - loop.index0 }}</td>
+                <!-- loop 는 플라스크 기본 템플릿 태그, loop.index0: 반복 순서 0부터 1씩 증가 -->
+                <!-- question.id 를 역순으로 정렬, 글이 20개라면 html 화면 위에서부터 20, 19... 11 / 10, 9 ... 1 순으로 question 나열  -->
                 <td>
                     {% if question.voter | length > 0 %}
                         <span class="badge badge-warning px-2 py-1">{{ question.voter | length }}</span>
@@ -76,6 +78,7 @@
                     <a class="page-link" data-page="{{ page_num }}" href="#">{{ page_num }}</a>
                 </li>
                 {% else %}
+                <!-- 현제 페이지는 active 로 강조표시 -->
                 <li class="page-item active" aria-current="page">
                     <a class="page-link" href="#">{{ page_num }}</a>
                 </li>
