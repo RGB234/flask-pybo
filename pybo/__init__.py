@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flaskext.markdown import Markdown
 
-#import config  현재 config.py 파일은 삭제됨
+# import config  현재 config.py 파일은 삭제됨
 
 naming_convention = {
     "ix": "ix_%(column_0_label)s",
@@ -19,24 +19,29 @@ naming_convention = {
 db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 
+
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
 def create_app():
     app = Flask(__name__)
-    #app.config.from_object(config)
+    # app.config.from_object(config)
+    # ../../venvs/myproject.cmd 파일의 @set APP_CONFIG_FILE=D:\Study\flaskProjects\myproject\config\development.py
     app.config.from_envvar('APP_CONFIG_FILE')
 
-    #ORM
+    # ORM
     db.init_app(app)
     if app.config['SQLALCHEMY_DATABASE_URI'].startswith("sqlite"):
         migrate.init_app(app, db, render_as_batch=True)
     else:
         migrate.init_app(app, db)
-        
+
     from . import models
 
-    #blueprint
+    # 가장 먼저 실행되는 파일인 __init__.py 에 blueprint 들을 등록.
+    # blueprint 들은 url 주소를 받아 그에 대응하는 라우팅 함수를 실행
+    # blueprint
     from .views import main_views, question_views, answer_views, auth_views, comment_views, vote_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(question_views.bp)
@@ -45,14 +50,14 @@ def create_app():
     app.register_blueprint(comment_views.bp)
     app.register_blueprint(vote_views.bp)
 
-    #필터
+    # 필터
     from .filter import format_datetime
     # 'datetime'이라는 이름으로 format_datetime이라는 필터 등록
     app.jinja_env.filters['datetime'] = format_datetime
 
-    #markdown
+    # markdown
     Markdown(app, extensions=['nl2br', 'fenced_code'])
-    #오류페이지
+    # 오류페이지
     app.register_error_handler(404, page_not_found)
 
     return app
